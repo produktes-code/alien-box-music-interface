@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alien Box - Splash Screen</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#004f58",
+                        "secondary-container": "#b204ff",
+                        "on-primary": "#003918",
+                        "primary-fixed": "#62ff96",
+                        "background": "#10141a",
+                        "on-tertiary-container": "#005d68",
+                        "error-container": "#93000a",
+                        "surface-bright": "#353940",
+                        "outline": "#859585",
+                        "surface-tint": "#00e475",
+                        "on-secondary-fixed": "#300049",
+                        "surface-container-lowest": "#0a0e14",
+                        "on-secondary-container": "#fff6fd",
+                        "primary": "#75ff9e",
+                        "surface": "#10141a",
+                        "inverse-surface": "#dfe2eb",
+                        "primary-container": "#00e676",
+                        "tertiary-fixed": "#9cf0ff",
+                        "surface-container-low": "#181c22",
+                        "secondary-fixed": "#f6d9ff",
+                        "secondary": "#e7b4ff",
+                        "on-primary-fixed-variant": "#005226",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#e7b4ff",
+                        "on-surface": "#dfe2eb",
+                        "tertiary-container": "#00dcf5",
+                        "on-secondary-fixed-variant": "#7100a4",
+                        "tertiary-fixed-dim": "#00daf3",
+                        "inverse-primary": "#006d35",
+                        "on-secondary": "#500075",
+                        "on-tertiary-fixed": "#001f24",
+                        "on-background": "#dfe2eb",
+                        "outline-variant": "#3b4a3d",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#31353c",
+                        "surface-dim": "#10141a",
+                        "on-tertiary": "#00363d",
+                        "primary-fixed-dim": "#00e475",
+                        "surface-container-highest": "#31353c",
+                        "tertiary": "#a3f1ff",
+                        "on-primary-fixed": "#00210b",
+                        "on-primary-container": "#00612e",
+                        "surface-container-high": "#262a31",
+                        "surface-container": "#1c2026",
+                        "on-surface-variant": "#bacbb9",
+                        "inverse-on-surface": "#2d3137"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max-width": "1440px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Space Grotesk"],
+                        "caption": ["Inter"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>.fade-in {
+    animation: fadeIn 2s ease-out forwards;
+    opacity: 0
+    }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+        } to {
+        opacity: 1;
+        transform: scale(1);
+        }
+    }
+.glow-pulse {
+    animation: pulseGlow 3s infinite alternate
+    }
+@keyframes pulseGlow {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(117, 255, 158, 0.5));
+        } 100% {
+        filter: drop-shadow(0 0 40px rgba(117, 255, 158, 0.9));
+        }
+    }
+.organic-shader {
+    background-image: url(../professional_high_fidelity_sci_fi_cinematic_scene_of_an_extraterrestrial_music/screen.png);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    mix-blend-mode: screen;
+    animation: pulseBackground 8s ease-in-out infinite alternate
+    }
+@keyframes pulseBackground {
+    0% {
+        transform: scale(1);
+        opacity: 0.3;
+        filter: brightness(1);
+        } 100% {
+        transform: scale(1.05);
+        opacity: 0.6;
+        filter: brightness(1.2);
+        }
+    }</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Dynamic Shader Background -->
+<div class="absolute inset-0 z-0 bg-gradient-to-b from-primary/10 to-background/90 organic-shader">
+</div>
+<!-- Splash Content -->
+<div class="relative z-10 flex flex-col items-center justify-center p-8 fade-in w-full max-w-5xl mx-auto">
+<!-- Alien Logo Image -->
+<div class="mb-10 relative flex justify-center items-center">
+<div class="absolute inset-0 rounded-full bg-primary/30 blur-3xl animate-pulse scale-125"></div>
+<img alt="Alien Box Logo Imagotipo" class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain relative z-10 glow-pulse drop-shadow-[0_0_25px_rgba(117,255,158,0.8)] rounded-2xl" src="../alien_imagotype/screen.png"/>
+</div>
+<!-- Typography: Brand Name -->
+<h1 class="font-display-lg text-6xl md:text-8xl lg:text-9xl text-primary text-center tracking-tight mb-4 uppercase drop-shadow-[0_0_15px_rgba(117,255,158,0.7)]">
+            ALIEN BOX
+        </h1>
+<!-- Subtitle/Slogan -->
+<p class="font-body-md text-lg md:text-xl text-tertiary-fixed-dim text-center uppercase tracking-[0.3em] mb-12 opacity-90 font-medium">
+            System Initializing...
+        </p>
+</div>
+<!-- Quality Seal Footer -->
+<div class="absolute bottom-12 z-10 flex flex-col items-center justify-center opacity-70 fade-in" style="animation-delay: 1s;">
+<span class="font-caption text-sm text-on-surface-variant mb-3 uppercase tracking-[0.2em] font-semibold">Powered by</span>
+<img alt="CHUS BZN Quality Seal Logo" class="h-10 md:h-12 lg:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100" src="../alien_eye_isotype/screen.png"/>
+</div>
+<!-- Note: TopNavBar and BottomNavBar are intentionally suppressed here as this is a linear/transactional Splash Screen, following the Semantic Shell Mandate. -->
+
+<script>
+    setTimeout(() => {
+        window.location.href = '../home_screen_organic_v2/code.html';
+    }, 3000);
+</script>
+</body></html>
