@@ -2,6 +2,11 @@
 
 ![Alien Box](alien_imagotype/screen.png)
 
+🌐 **Read this in:** **🇬🇧 English** | [🇪🇸 Español](README_es.md) | [🇩🇪 Deutsch](README_de.md) | [🇷🇺 Русский](README_ru.md) | [🇯🇵 日本語](README_ja.md) | [🇺🇦 Українська](README_uk.md) | [🇨🇳 中文](README_zh.md)
+
+---
+
+
 **Alien Box** is a state-of-the-art multimodal forensic audio analysis engine and DAW template generator. It connects directly to global music networks to extract real metadata from any text input, dissects the frequency and dynamic parameters of commercial tracks, and generates customized starter templates for major DAWs (Ableton, Logic Pro, Cubase, FL Studio, Pro Tools).
 
 Built with precision engineering by **CHUS BZN** at **produktes-code**.
