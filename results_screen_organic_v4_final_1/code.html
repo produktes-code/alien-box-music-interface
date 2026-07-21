@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alien Box - Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#262a31",
+                        "on-primary-container": "#00612e",
+                        "primary-fixed-dim": "#00e475",
+                        "on-secondary": "#500075",
+                        "on-secondary-container": "#fff6fd",
+                        "inverse-primary": "#006d35",
+                        "surface-container-lowest": "#0a0e14",
+                        "surface-tint": "#00e475",
+                        "surface-container-low": "#181c22",
+                        "on-surface-variant": "#bacbb9",
+                        "surface-container": "#1c2026",
+                        "secondary-fixed": "#f6d9ff",
+                        "tertiary-fixed": "#9cf0ff",
+                        "on-primary-fixed": "#00210b",
+                        "on-primary-fixed-variant": "#005226",
+                        "surface-variant": "#31353c",
+                        "inverse-on-surface": "#2d3137",
+                        "surface": "#10141a",
+                        "outline-variant": "#3b4a3d",
+                        "on-tertiary-fixed-variant": "#004f58",
+                        "on-surface": "#dfe2eb",
+                        "secondary-container": "#b204ff",
+                        "on-tertiary-container": "#005d68",
+                        "background": "#10141a",
+                        "on-error": "#690005",
+                        "on-primary": "#003918",
+                        "on-background": "#dfe2eb",
+                        "on-secondary-fixed": "#300049",
+                        "primary": "#75ff9e",
+                        "on-tertiary-fixed": "#001f24",
+                        "surface-dim": "#10141a",
+                        "primary-fixed": "#62ff96",
+                        "on-tertiary": "#00363d",
+                        "surface-container-highest": "#31353c",
+                        "secondary-fixed-dim": "#e7b4ff",
+                        "primary-container": "#00e676",
+                        "on-secondary-fixed-variant": "#7100a4",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#a3f1ff",
+                        "tertiary-container": "#00dcf5",
+                        "outline": "#859585",
+                        "tertiary-fixed-dim": "#00daf3",
+                        "inverse-surface": "#dfe2eb",
+                        "surface-bright": "#353940",
+                        "secondary": "#e7b4ff",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "container-max-width": "1440px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #080C12; color: #dfe2eb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .alien-header-bar { border-top: 4px solid #00e676; }
+        .alien-button-primary { background-color: #00e676; color: #080C12; border: 1px solid #00e676; transition: all 0.3s ease; }
+        .alien-button-primary:hover { box-shadow: 0 0 15px rgba(0, 230, 118, 0.5); }
+        .alien-button-secondary { background-color: rgba(8, 12, 18, 0.6); backdrop-filter: blur(8px); color: #00E5FF; border: 1px solid #00E5FF; transition: all 0.3s ease; }
+        .alien-button-secondary:hover { box-shadow: 0 0 15px rgba(0, 229, 255, 0.5); background-color: rgba(8, 12, 18, 0.8); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .accordion-open .accordion-content { max-height: 1000px; }
+        .accordion-open .material-symbols-outlined.expand-icon { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="bg-[#080C12] min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary/30 selection:text-primary">
+<!-- Background Studio Image - Calmer, blured, distinct placement -->
+<img alt="Extraterrestrial Music Studio" class="fixed inset-0 z-[-1] w-full h-full object-cover opacity-15 pointer-events-none mix-blend-overlay blur-sm scale-105" src="https://lh3.googleusercontent.com/aida/AP1WRLtyM0PD7SYXBwvkNFCiNaAx06arccfP8KzIj11A4dx--zOENCDIs42MmmRLiVLMpPmCANPJuHyzlSD7Pnd7qWfrS_25Q7nUkEe-FmnCVwePeqlnGxoCTSz9lKwOSRK3IGFdJtqm02HI1N4JtBft7N9zLWk1N0p77icsk8mXNwqlbjGZoVi8qNa-6Wq2X1DTz8_D-3dPI_k4-MOcNwyyO7X-zrXlBX6EqTB-H8PjpiOxWFBgPhbZpKYkwTLR"/>
+<!-- Background Canvas -->
+<canvas class="fixed inset-0 z-[-2] w-full h-full" id="bg-canvas"></canvas>
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 bg-[#080C12]/40 backdrop-blur-xl sticky top-0 z-50 border-b border-primary/20">
+<div class="flex items-center gap-4">
+<img alt="Alien Bioworks" class="h-10 w-auto rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Hx7jO2JPJyMvWAk3iqrTY7c9KH6sTR4DxBFt-BJQrrw2V4C_qot_pCT91TMAlQM6g_mCRi3QnkMLmqGJ2kWo6NEbftou20mb6eaX0063RmkuKmTBCWzGZr4atwiVG9DKgEFOsb6e2XzH7vMZwDIQ4vpwJwXkUen1G-2ZtM9RmkXi9qvkg_bGuvm3EhMYrgE5JHod6qxIZPyKhBZHYrNeti_nKJNRAUneupqsf9Vlr729Q4pkjnx5LTbqPcgvSa7OSoIJZcxfFMg7"/>
+</div>
+<div class="hidden md:flex gap-8 border-b border-tertiary-container/50">
+<a class="text-on-surface-variant font-medium hover:text-primary hover:drop-shadow-[0_0_10px_rgba(0,230,118,0.5)] transition-all py-2" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary hover:drop-shadow-[0_0_10px_rgba(0,230,118,0.5)] transition-all py-2" href="#">Input</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-2 hover:text-primary hover:drop-shadow-[0_0_10px_rgba(0,230,118,0.5)] transition-all" href="#">Results</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary hover:drop-shadow-[0_0_10px_rgba(0,230,118,0.5)] transition-all scale-95 active:scale-90" data-icon="sensors">sensors</span>
+<img alt="CHUS BZN logo" class="w-8 h-8 rounded-full border border-primary/50 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc9a4eKtqJZk-H-MVwu1b3ZvYWrzU-zy2nlRIloPpiIMBWiZBMD1HqyFtkYskGjBzmgrl4JBxqjOHH-Oys0t6HP2oEoG6mccBumm4yWEIreVRhXwyC7CL62S-NHQY-1XPGiPxdh6fjEqxC4DGRRptHHwy8jsM_3PYSEPa6cgZKuFNjKxOWNHtXB64MrYkrG6cIS1FYomla2DLopEH5vW_78x9DIqzGRPJ7b8zShCSw85E72Pfzx10g7dgPEs2gW-gWj71r4YNBjfst"/>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center px-margin-mobile md:px-margin-desktop py-12 md:py-20 max-w-container-max-width w-full mx-auto pb-16">
+<!-- Header Section -->
+<div class="w-full text-center mb-12 relative z-10">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4 drop-shadow-md">ANÁLISIS COMPLETADO</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto drop-shadow-sm">La estructura y el ADN del track han sido decodificados con éxito. Revisa la Ficha Técnica a continuación.</p>
+</div>
+<!-- Results Canvas -->
+<div class="w-full max-w-4xl grid grid-cols-1 gap-8 relative z-10">
+<!-- Ficha Técnica Card -->
+<div class="bg-[#080C12]/50 backdrop-blur-3xl border border-primary/40 shadow-[0_0_40px_-10px_rgba(0,230,118,0.25)] alien-header-bar rounded-DEFAULT p-6 md:p-8 flex flex-col relative overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_-5px_rgba(0,230,118,0.4)] hover:border-primary/60">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none">
+<span class="material-symbols-outlined text-[120px] text-primary" data-icon="troubleshoot">troubleshoot</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-3 drop-shadow-[0_0_8px_rgba(0,230,118,0.4)]">
+<span class="material-symbols-outlined" data-icon="science">science</span>
+                    Ficha Técnica
+                </h2>
+<!-- Accordion List -->
+<div class="space-y-4 relative z-10 w-full">
+<!-- Item 1 -->
+<div class="border border-primary/30 bg-surface-container/30 backdrop-blur-xl rounded-DEFAULT overflow-hidden accordion-item transition-all duration-300 shadow-[0_0_15px_-5px_rgba(0,230,118,0.15)] hover:bg-surface-container/50 hover:shadow-[0_0_25px_-5px_rgba(0,230,118,0.3)] hover:border-primary/60">
+<button class="w-full px-6 py-4 flex justify-between items-center transition-colors text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Género y BPM</span>
+<span class="material-symbols-outlined text-primary/80 expand-icon transition-transform duration-400" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content bg-[#080C12]/60">
+<div class="p-6 border-t border-primary/20 font-body-md text-body-md text-on-surface-variant">
+<p><strong class="text-tertiary-container drop-shadow-sm">Género Detectado:</strong> Melodic Techno / Afro House Fusion</p>
+<p><strong class="text-tertiary-container drop-shadow-sm">BPM Estimado:</strong> 122 BPM</p>
+<p><strong class="text-tertiary-container drop-shadow-sm">Key:</strong> F# Minor</p>
+<p class="mt-4 text-on-surface-variant/90">El análisis revela una fuerte base rítmica característica del Afro House, combinada con sintetizadores atmosféricos y progresiones melódicas propias del Melodic Techno moderno.</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="border border-primary/30 bg-surface-container/30 backdrop-blur-xl rounded-DEFAULT overflow-hidden accordion-item transition-all duration-300 shadow-[0_0_15px_-5px_rgba(0,230,118,0.15)] hover:bg-surface-container/50 hover:shadow-[0_0_25px_-5px_rgba(0,230,118,0.3)] hover:border-primary/60">
+<button class="w-full px-6 py-4 flex justify-between items-center transition-colors text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Despiece Capa por Capa</span>
+<span class="material-symbols-outlined text-primary/80 expand-icon transition-transform duration-400" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content bg-[#080C12]/60">
+<div class="p-6 border-t border-primary/20 font-body-md text-body-md text-on-surface-variant space-y-5">
+<div>
+<h4 class="text-primary-fixed font-bold mb-1 drop-shadow-sm">Drums &amp; Percussion</h4>
+<p class="text-on-surface-variant/90">Kick profundo con sub-frecuencias acentuadas (40-60Hz). Tops orgánicos (shakers, congas) con swing generoso.</p>
+</div>
+<div>
+<h4 class="text-primary-fixed font-bold mb-1 drop-shadow-sm">Bassline</h4>
+<p class="text-on-surface-variant/90">Bajo tipo Reese o Moog sub oscilando en F#, saturado en frecuencias medias (300-800Hz) para presencia en dispositivos móviles.</p>
+</div>
+<div>
+<h4 class="text-primary-fixed font-bold mb-1 drop-shadow-sm">Synths &amp; Atmos</h4>
+<p class="text-on-surface-variant/90">Pads evolutivos con modulación de filtro lento. Arpegios estilo pluck con delay sincronizado (1/8 dot).</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="border border-primary/30 bg-surface-container/30 backdrop-blur-xl rounded-DEFAULT overflow-hidden accordion-item transition-all duration-300 shadow-[0_0_15px_-5px_rgba(0,230,118,0.15)] hover:bg-surface-container/50 hover:shadow-[0_0_25px_-5px_rgba(0,230,118,0.3)] hover:border-primary/60">
+<button class="w-full px-6 py-4 flex justify-between items-center transition-colors text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Mezcla y Ruteo</span>
+<span class="material-symbols-outlined text-primary/80 expand-icon transition-transform duration-400" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content bg-[#080C12]/60">
+<div class="p-6 border-t border-primary/20 font-body-md text-body-md text-on-surface-variant">
+<ul class="list-disc list-inside space-y-2 text-on-surface-variant/90">
+<li>Sidechain agresivo (Kick a Bass y Pads) con un ratio de 4:1 y release rápido (~50ms).</li>
+<li>Reverb Plate extensa en percusiones altas.</li>
+<li>Compresión Glue en el Drum Bus para cohesión.</li>
+<li>Stereo Widening aplicado selectivamente a las frecuencias medias-altas de los sintes.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="border border-primary/30 bg-surface-container/30 backdrop-blur-xl rounded-DEFAULT overflow-hidden accordion-item transition-all duration-300 shadow-[0_0_15px_-5px_rgba(0,230,118,0.15)] hover:bg-surface-container/50 hover:shadow-[0_0_25px_-5px_rgba(0,230,118,0.3)] hover:border-primary/60">
+<button class="w-full px-6 py-4 flex justify-between items-center transition-colors text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Secretos de Producción</span>
+<span class="material-symbols-outlined text-primary/80 expand-icon transition-transform duration-400" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content bg-[#080C12]/60">
+<div class="p-6 border-t border-primary/20 font-body-md text-body-md text-on-surface-variant">
+<p class="text-on-surface-variant/90">El track utiliza ruido blanco sutilmente en capas debajo del clap principal para darle "aire" y textura. Además, se nota una automatización de volumen en los acordes de sintetizador justo antes del drop para crear tensión (efecto de vacío).</p>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="border border-primary/30 bg-surface-container/30 backdrop-blur-xl rounded-DEFAULT overflow-hidden accordion-item transition-all duration-300 shadow-[0_0_15px_-5px_rgba(0,230,118,0.15)] hover:bg-surface-container/50 hover:shadow-[0_0_25px_-5px_rgba(0,230,118,0.3)] hover:border-primary/60">
+<button class="w-full px-6 py-4 flex justify-between items-center transition-colors text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Super Prompt IA</span>
+<span class="material-symbols-outlined text-primary/80 expand-icon transition-transform duration-400" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content bg-[#080C12]/60">
+<div class="p-6 border-t border-primary/20 font-body-md text-body-md text-on-surface-variant bg-surface-container-lowest/60 rounded-b-DEFAULT relative backdrop-blur-2xl">
+<code class="block font-mono text-sm text-tertiary-fixed whitespace-pre-wrap">Generate a prompt for an AI music generator based on: 122 BPM, F# Minor. Genre: Fusion of Melodic Techno and Afro House. Structure: Intro (16 bars, sparse percussion) -&gt; Build (16 bars, filter automation on pluck synth) -&gt; Drop (32 bars, heavy sub bass, organic shakers, wide brass stabs) -&gt; Breakdown (16 bars, ethereal pads, no kick) -&gt; Build -&gt; Drop 2 -&gt; Outro. Instrumentation: 808-style deep kick, analog Moog bass, atmospheric vocal chops, intricate organic percussion loops. Mood: Dark, energetic, hypnotic, club-ready. Production notes: Heavy sidechain, wide stereo image on mids/highs.</code>
+<button class="absolute top-4 right-4 text-primary/60 hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,230,118,0.5)]" onclick="copyPrompt()">
+<span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons Area -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+<!-- Primary Action -->
+<button class="alien-button-primary font-label-md text-label-md px-8 py-4 uppercase rounded-DEFAULT flex items-center justify-center gap-2 w-full md:col-span-2 shadow-lg">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                    DESCARGAR PLANTILLA .ZIP
+                </button>
+<!-- Secondary Actions -->
+<button class="alien-button-secondary font-label-md text-label-md px-8 py-4 uppercase rounded-DEFAULT flex items-center justify-center gap-2 w-full">
+<span class="material-symbols-outlined" data-icon="restart_alt">restart_alt</span>
+                    NUEVO ANÁLISIS
+                </button>
+<button class="alien-button-secondary font-label-md text-label-md px-8 py-4 uppercase rounded-DEFAULT flex items-center justify-center gap-2 w-full" onclick="copyPrompt()">
+<span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+                    COPIAR SUPER PROMPT
+                </button>
+</div>
+</div>
+<footer class="w-full text-center py-8 text-on-surface font-caption text-caption mt-12 opacity-90 tracking-widest uppercase">
+            © CHUS BZN 2026
+        </footer>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-[#080C12]/80 backdrop-blur-xl border-t border-primary/20 shadow-[0_-4px_20px_rgba(0,229,255,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-md text-label-md text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-label-md text-label-md text-[10px]">Input</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl px-4 py-1 border border-primary/30 shadow-[0_0_15px_-5px_rgba(0,230,118,0.3)] transition-all duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="equalizer">equalizer</span>
+<span class="font-label-md text-label-md text-[10px]">Results</span>
+</a>
+</nav>
+<script>
+        function toggleAccordion(button) {
+            const item = button.closest('.accordion-item');
+            const wasOpen = item.classList.contains('accordion-open');
+            
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-open');
+            });
+
+            // Open clicked if it wasn't already open
+            if (!wasOpen) {
+                item.classList.add('accordion-open');
+            }
+        }
+
+        function copyPrompt() {
+            // Placeholder for copy logic
+            alert("Super Prompt copiado al portapapeles.");
+        }
+    </script>
+<!-- WebGL Background Shader -->
+<script>
+        const canvas = document.getElementById('bg-canvas');
+        const gl = canvas.getContext('webgl');
+
+        if (gl) {
+            const vertexShaderSource = `
+                attribute vec2 position;
+                varying vec2 v_texCoord;
+                void main() {
+                    v_texCoord = position * 0.5 + 0.5;
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            const fragmentShaderSource = `
+precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+// Simplex 2D noise
+vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+float snoise(vec2 v){
+  const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+           -0.577350269189626, 0.024390243902439);
+  vec2 i  = floor(v + dot(v, C.yy) );
+  vec2 x0 = v -   i + dot(i, C.xx);
+  vec2 i1;
+  i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+  vec4 x12 = x0.xyxy + C.xxzz;
+  x12.xy -= i1;
+  i = mod(i, 289.0);
+  vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+  + i.x + vec3(0.0, i1.x, 1.0 ));
+  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+    dot(x12.zw,x12.zw)), 0.0);
+  m = m*m ;
+  m = m*m ;
+  vec3 x = 2.0 * fract(p * C.www) - 1.0;
+  vec3 h = abs(x) - 0.5;
+  vec3 a0 = x - floor(x + 0.5);
+  vec3 g = a0 * vec3(x0.x,x12.xz) + h * vec3(x0.y,x12.yw);
+  vec4 norm = 1.79284291400159 - 0.85373472095314 *
+    vec4(dot(a0,a0), dot(g.xyz,g.xyz));
+  vec3 r = g * norm.xyz;
+  float n = 130.0 * dot(m, r);
+  return n;
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 mouse = u_mouse / u_resolution;
+    
+    // Background deep void - calm resolved atmosphere
+    vec3 color = vec3(0.02, 0.04, 0.06); 
+    
+    // Liquid Organic Flow - slower, calmer
+    float n1 = snoise(uv * 1.2 + u_time * 0.03);
+    float n2 = snoise(uv * 2.5 - u_time * 0.02 + n1);
+    
+    // Bioluminescent pulses
+    vec3 cyan = vec3(0.0, 0.6, 0.8);
+    vec3 deepBlue = vec3(0.0, 0.15, 0.3);
+    vec3 accentGreen = vec3(0.0, 0.7, 0.4);
+    
+    float pulse = (sin(u_time * 1.2 + uv.y * 5.0) * 0.5 + 0.5) * 0.4 + 0.6;
+    
+    float mask = smoothstep(0.2, 0.7, n2);
+    vec3 bioColor = mix(deepBlue, cyan * pulse, uv.y);
+    color = mix(color, mix(bioColor, accentGreen * 0.2, mask), mask * 0.6);
+    
+    // Mouse interaction - soft glow
+    float d = distance(uv, mouse);
+    float mGlow = smoothstep(0.5, 0.0, d);
+    color += cyan * mGlow * 0.08;
+    
+    // Fine star field - very subtle
+    float stars = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+    if (stars > 0.999) {
+        float flicker = sin(u_time * 3.0 + stars * 10.0) * 0.5 + 0.5;
+        color += vec3(0.8, 0.9, 1.0) * flicker * 0.3;
+    }
+
+    gl_FragColor = vec4(color, 1.0);
+}
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error(gl.getProgramInfoLog(program));
+            }
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                -1.0, -1.0,
+                 1.0, -1.0,
+                -1.0,  1.0,
+                -1.0,  1.0,
+                 1.0, -1.0,
+                 1.0,  1.0
+            ]), gl.STATIC_DRAW);
+
+            const positionAttributeLocation = gl.getAttribLocation(program, "position");
+            gl.enableVertexAttribArray(positionAttributeLocation);
+            gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation = gl.getUniformLocation(program, "u_time");
+            const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+            const mouseLocation = gl.getUniformLocation(program, "u_mouse");
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = window.innerHeight - e.clientY;
+            });
+
+            function render(time) {
+                time *= 0.001; // convert to seconds
+                
+                // Resize canvas if needed
+                if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+                }
+
+                gl.useProgram(program);
+                gl.uniform1f(timeLocation, time);
+                gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
+                gl.uniform2f(mouseLocation, mouseX, mouseY);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+                requestAnimationFrame(render);
+            }
+
+            requestAnimationFrame(render);
+        }
+    </script>
+</body></html>

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            background-color: #0b0e14;
+            color: #bacbb9;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .a4-page {
+            width: 100%;
+            height: 100vh; 
+            padding: 10mm 15mm; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribución uniforme para tamaños idénticos */
+            page-break-after: always;
+            page-break-inside: avoid;
+            background-color: #0b0e14;
+            overflow: hidden;
+        }
+
+        .chapter-container {
+            flex: 1; /* Esto hace que todos los capítulos se expandan para ocupar el mismo espacio en todas las páginas y todos los idiomas, haciéndolos físicamente idénticos */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chapter-title {
+            color: #75ff9e;
+            font-size: 16px; 
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            border-bottom: 2px solid #1f382a;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            margin-top: 8px; 
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .glass-panel {
+            background-color: #12161b;
+            border: 1px solid #1f252d;
+            border-radius: 8px;
+            padding: 10px 14px; 
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+
+        .panel-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px; 
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 4px;
+        }
+        .panel-title.green { color: #75ff9e; }
+        .panel-title.purple { color: #e7b4ff; }
+        .panel-title.white { color: #ffffff; }
+        .panel-title.orange { color: #ffb86c; }
+
+        .two-cols {
+            display: flex;
+            gap: 10px; 
+            margin-bottom: 8px;
+            flex-shrink: 0;
+            align-items: center;
+        }
+        .col-left { flex: 1; }
+        .col-right {
+            width: 100px; 
+            background-color: #12161b;
+            border: 1px solid #1f252d;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cover-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .logo-img {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 40px rgba(117, 255, 158, 0.5));
+        }
+        
+        .cover-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            text-shadow: 0 0 25px rgba(117, 255, 158, 0.6);
+            letter-spacing: -0.02em;
+        }
+        
+        .cover-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            color: #75ff9e;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .cover-box {
+            background-color: #12161b;
+            border: 1px solid #1f252d;
+            border-radius: 12px;
+            padding: 18px 25px;
+            margin-top: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .cover-box-version {
+            color: #bacbb9;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        
+        .cover-box-dev {
+            color: #7e8b8c;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .cover-box-conf {
+            color: #2b5d43;
+            font-size: 11px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">Manual Técnico de Operaciones</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">VERSIÓN 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">Confidencial – DSP Architecture | LANG: ES</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. ARQUITECTURA DEL SISTEMA</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">¿Qué es Alien Box?</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box es una estación forense de análisis de audio basada en redes neuronales profundas. A diferencia de un separador de stems tradicional, Alien Box utiliza la matriz Demucs v4 combinada con algoritmos de transcripción Basic-Pitch para decodificar el ADN musical de cualquier track comercial.</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">El sistema está diseñado para operar en la fase de pre-producción y estudio (White Room), ofreciendo a los productores la capacidad de abducir la firma espectral, el rango dinámico y los patrones MIDI de referencias complejas, exportándolos instantáneamente como plantillas nativas para entornos DAW.</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Motor Alien Bioworks</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">El núcleo del sistema ("Alien Engine") ejecuta procesos asíncronos en un entorno aislado, permitiendo el cálculo de transformadas de Fourier rápidas (FFT) y la re-síntesis de armónicos. No utilizamos simulaciones; cada extracción analiza la fase estéreo y la correlación del audio fuente.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. DESPLIEGUE TÉCNICO E INSTALACIÓN CI/CD</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Pipeline Riguroso</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Empleamos un pipeline riguroso (CI/CD) para la aplicación de escritorio, garantizando un despliegue sin fallos y una instalación nativa.</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Al no contar con un certificado de desarrollador de pago de Apple, Gatekeeper pondrá el binario en cuarentena temporal por seguridad. El método legítimo y certificado por ingenieros para el bypass local es hacer Clic derecho sobre la aplicación -> Abrir (no hagas doble clic directo). No es un fallo ni un archivo corrupto, es el flujo de trabajo estándar en software open-source de alto rendimiento.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defender mostrará una pantalla azul indicando "PC protegido". Simplemente haz clic en "Más información" y luego en el botón "Ejecutar de todas formas" que aparecerá.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. FLUJO DE SEÑAL Y RUTEO</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Transparencia Absoluta</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Una plataforma profesional de grado estudio debe ofrecer transparencia absoluta sobre sus flujos de datos. La consola no es meramente decorativa.</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Ruteo I/O</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">En producción de alta densidad, un renderizado pesado en el disco SSD principal puede asfixiar el paginado de memoria del sistema. Alien Box redirige y mapea de forma determinista la caché hacia matrices RAID o unidades NVMe.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Aislamiento Neuronal 64-bit</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Todo el procesamiento interno ocurre en aritmética de punto flotante de 64 bits. Esto previene cualquier degradación o distorsión de fase durante el cálculo cruzado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. PANEL DE ABDUCCIÓN (INPUT)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Entrada Universal (URL o Texto)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">El sistema admite cualquier URL válida (YouTube, Spotify) o texto libre (ej: "The Prodigy - Poison"). Un módulo de scraping en segundo plano intercepta los metadatos y el flujo de audio en tiempo real, omitiendo las protecciones estándar.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Selección de Entorno (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box compila los datos extraídos en plantillas propietarias estructuradas. Los formatos soportados incluyen: Ableton Live (.als), Logic Pro (.logicx), Cubase (.cpr), FL Studio (.flp) y Pro Tools (.ptx). Se generan buses de grupo y ruteos preconfigurados con plugins nativos.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. MODOS DE EXTRACCIÓN (D1, D2, D3)</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Modo D1 (Ligero)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Análisis de transitorios y generación de MIDI rítmico. Extrae el groove fundamental sin procesar polifonía pesada. Ideal para clonar el swing exacto de un track. Tiempo de ejecución: ~5s.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Modo D2 (Profundo)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Activa el módulo demucs. Separación en 4 stems (Vocals, Drums, Bass, Other). Extracción de MIDI polifónico a través de basic-pitch, detectando síntesis FM o Wavetable subyacente. Tiempo de ejecución: ~3m.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Modo D3 (Extremo)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Desglose en 6 stems. Análisis forense de la curva de ecualización y emulaciones específicas de hardware analógico de los ingenieros de mezcla originales.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. DESCODIFICACIÓN FORENSE (CAPA POR CAPA)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Bombo, Caja y Percusión (Drums)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> Se analiza la frecuencia fundamental (ej. 48Hz) y el armónico secundario de pegada (click). Alien Box infiere EQ quirúrgica estilo SSL E-Channel y sugiere un anclaje Mono filtrando el canal Side < 120Hz.<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> Identifica el Snap de la bordonera (2kHz a 5kHz) y el Cuerpo fundamental (150-250Hz). Propone Transient Shapers.<br>• <strong style="color: #ffffff; font-weight: 700;">Hi-Hats:</strong> Detecta estridencias y automáticamente sugiere De-Essers o compresión multibanda súper rápida.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Sintetizadores, Guitarras y Percusión Auxiliar</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Congas / Toms:</strong> Mapeo de panorámica estéreo asimétrica (L/R) y ecualización dinámica para eliminar "ringings".<br>• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> Identificación del corte de filtro (Cutoff) e inyección de Ensanchadores Estéreo basados en el efecto Haas.<br>• <strong style="color: #ffffff; font-weight: 700;">Guitarras:</strong> Identifica el cuerpo de madera o la distorsión del amplificador. Propone recortes estratégicos entre 200-500Hz para limpiar el barro frecuencial.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">Cuerdas, Vientos y Vocales</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Strings/Brass:</strong> Análisis de articulación. Infiere reverberación por convolución tipo "Hall" oscuro o "Chamber".<br>• <strong style="color: #ffffff; font-weight: 700;">Vocales:</strong> Disecciona la cadena vocal líder. Detecta compresión en serie (Ej: Ataque rápido estilo 1176 seguido de nivelación óptica LA-2A) y EQ dinámica activa.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. SUPER PROMPT IA Y GUÍA DE MEZCLA</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Guía de Mezcla y Ruteo</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Se reportan técnicas detectadas como Sidechain Compression extremo (Ghost Kick), uso de expansión estéreo (Algoritmo Haas), De-Essing en vocales y distorsión armónica en buses grupales (Tape/Tube saturation).</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Super Prompt IA</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box compila todos estos datos (BPM, Key, LUFS objetivo, Estructura, Instrumentos) en un prompt altamente estructurado, optimizado para alimentar modelos generativos como Suno, Udio o Stable Audio, obligándolos a adherirse a parámetros de mastering profesional.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. TELEMETRÍA Y EMPAQUETADO</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Sensores Alien Bioworks</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">El icono superior de sensores activa la monitorización del Alien Engine en tiempo real. Permite al ingeniero observar el uso de CPU, la asignación de RAM y los tiempos de latencia durante la extracción profunda en el modo D2/D3.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Descarga de Plantilla .ZIP</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">El botón final genera dinámicamente un archivo ZIP en el servidor que contiene:<br>• El archivo de proyecto del DAW seleccionado (.als, .cpr, etc).<br>• La estructura de buses ruteada y etiquetada por colores.<br>• Los archivos MIDI extraídos importados directamente en sus pistas correspondientes.<br>• Una copia en texto plano de la Ficha Técnica para referencia offline.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. ARQUITECTURA MULTIMODAL GLOBAL</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Soporte Estructural 100% Unicode</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Tratar la internacionalización de una herramienta corporativa mediante simples archivos JSON de traducción plana es insuficiente. En Alien Box hemos codificado un paradigma Multimodal Estructural de grado A. Esto implica un soporte total del estándar Unicode, permitiendo una recarga en caliente de los diccionarios completos en 7 idiomas nativos.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. BLINDAJE, FAQ Y LICENCIA</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Arquitectura de Blindaje (Shielding)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> Algoritmos estrangulan cualquier pico anómalo de peticiones.<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> Certificación de firma binaria cruda para evitar malware inyectado en archivos .mp3.<br>• <strong style="color: #ffffff; font-weight: 700;">Limitador RAM:</strong> Rechazamos archivos atípicos (>2GB) en umbral para prevenir colapsos OOM.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">FAQ Operativo</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">P:</strong> Puerto 8000 "Address Already In Use".<br><strong style="color: #ffffff; font-weight: 700;">R:</strong> Ejecuta <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code>.<br><strong style="color: #ffffff; font-weight: 700;">P:</strong> Interbloqueo al subir WAV.<br><strong style="color: #ffffff; font-weight: 700;">R:</strong> RAM colapsada o firma binaria bloqueada.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // Manifiesto y Licencia<br>
+                Desarrollado en **produktes-code** por CHUS BZN. Licenciado bajo CC BY-NC-SA 4.0. ESTÁNDAR CORPORATIVO - RETAIL READY.
+            </div>
+        </div>
+    </div>
+    
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">Technical Operations Manual</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">VERSION 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">Confidential – DSP Architecture | LANG: EN</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. SYSTEM ARCHITECTURE</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">What is Alien Box?</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box is a forensic audio analysis station based on deep neural networks. Unlike a traditional stem separator, Alien Box uses the Demucs v4 matrix combined with Basic-Pitch transcription algorithms to decode the musical DNA of any commercial track.</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">The system is designed to operate in the pre-production and studio phase (White Room), offering producers the ability to abduct the spectral signature, dynamic range, and MIDI patterns of complex references, exporting them instantly as native templates for DAW environments.</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Alien Bioworks Engine</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">The core of the system ("Alien Engine") executes asynchronous processes in an isolated environment, allowing the calculation of Fast Fourier Transforms (FFT) and harmonic re-synthesis. We do not use simulations; each extraction analyzes the stereo phase and correlation of the source audio.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. TECHNICAL DEPLOYMENT AND CI/CD INSTALLATION</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Rigorous Pipeline</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">We employ a rigorous pipeline (CI/CD) for the desktop application, guaranteeing a flawless deployment and a native installation.</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Since it lacks a paid Apple developer certificate, Gatekeeper will temporarily quarantine the binary for security. The legitimate and engineer-certified method for local bypass is to Right-click on the application -> Open (do not double-click directly). This is not a bug or a corrupt file, it is the standard workflow in high-performance open-source software.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defender will display a blue screen indicating "PC protected". Simply click on "More info" and then on the "Run anyway" button that will appear.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. SIGNAL FLOW AND ROUTING</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Absolute Transparency</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">A professional studio-grade platform must offer absolute transparency regarding its data flows. The console is not merely decorative.</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">I/O Routing</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">In high-density production, heavy rendering on the main SSD drive can choke the system's memory paging. Alien Box deterministically redirects and maps the cache to RAID arrays or NVMe drives.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">64-bit Neural Isolation</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">All internal processing occurs in 64-bit floating-point arithmetic. This prevents any phase degradation or distortion during cross-calculation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. ABDUCTION PANEL (INPUT)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Universal Input (URL or Text)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">The system accepts any valid URL (YouTube, Spotify) or free text (e.g., "The Prodigy - Poison"). A background scraping module intercepts the metadata and audio stream in real-time, bypassing standard protections.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Environment Selection (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box compiles the extracted data into structured proprietary templates. Supported formats include: Ableton Live (.als), Logic Pro (.logicx), Cubase (.cpr), FL Studio (.flp), and Pro Tools (.ptx). Pre-configured group buses and routings with native plugins are generated.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. EXTRACTION MODES (D1, D2, D3)</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">D1 Mode (Lightweight)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Transient analysis and rhythmic MIDI generation. Extracts the fundamental groove without processing heavy polyphony. Ideal for cloning the exact swing of a track. Execution time: ~5s.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">D2 Mode (Deep)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Activates the demucs module. Separation into 4 stems (Vocals, Drums, Bass, Other). Extraction of polyphonic MIDI via basic-pitch, detecting underlying FM or Wavetable synthesis. Execution time: ~3m.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">D3 Mode (Extreme)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Breakdown into 6 stems. Forensic analysis of the equalization curve and specific analog hardware emulations of the original mixing engineers.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. FORENSIC DECODING (LAYER BY LAYER)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Kick, Snare, and Percussion (Drums)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> The fundamental frequency (e.g., 48Hz) and the secondary punch harmonic (click) are analyzed. Alien Box infers surgical EQ SSL E-Channel style and suggests a Mono anchor by filtering the Side channel < 120Hz.<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> Identifies the Snap of the snare wire (2kHz to 5kHz) and the fundamental Body (150-250Hz). Proposes Transient Shapers.<br>• <strong style="color: #ffffff; font-weight: 700;">Hi-Hats:</strong> Detects harshness and automatically suggests De-Essers or super-fast multiband compression.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Synthesizers, Guitars, and Aux Percussion</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Congas / Toms:</strong> Asymmetrical stereo panning mapping (L/R) and dynamic equalization to eliminate "ringings".<br>• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> Identification of the filter cutoff and injection of Stereo Wideners based on the Haas effect.<br>• <strong style="color: #ffffff; font-weight: 700;">Guitars:</strong> Identifies the wooden body or amplifier distortion. Proposes strategic cuts between 200-500Hz to clean up frequency mud.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">Strings, Brass, and Vocals</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Strings/Brass:</strong> Articulation analysis. Infers convolution reverb of the dark "Hall" or "Chamber" type.<br>• <strong style="color: #ffffff; font-weight: 700;">Vocals:</strong> Dissects the lead vocal chain. Detects serial compression (Ex: 1176-style fast attack followed by LA-2A optical leveling) and active dynamic EQ.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. SUPER PROMPT AI AND MIXING GUIDE</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Mixing and Routing Guide</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Detected techniques such as extreme Sidechain Compression (Ghost Kick), use of stereo expansion (Haas Algorithm), vocal De-Essing, and harmonic distortion on group buses (Tape/Tube saturation) are reported.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Super Prompt AI</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box compiles all this data (BPM, Key, target LUFS, Structure, Instruments) into a highly structured prompt, optimized to feed generative models like Suno, Udio, or Stable Audio, forcing them to adhere to professional mastering parameters.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. TELEMETRY AND PACKAGING</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Alien Bioworks Sensors</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">The top sensors icon activates real-time monitoring of the Alien Engine. It allows the engineer to observe CPU usage, RAM allocation, and latency times during deep extraction in D2/D3 mode.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">.ZIP Template Download</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">The final button dynamically generates a ZIP file on the server containing:<br>• The project file of the selected DAW (.als, .cpr, etc).<br>• The bus structure routed and color-coded.<br>• The extracted MIDI files imported directly into their corresponding tracks.<br>• A plain text copy of the Technical Sheet for offline reference.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. GLOBAL MULTIMODAL ARCHITECTURE</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">100% Unicode Structural Support</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Handling the internationalization of a corporate tool using simple flat translation JSON files is insufficient. In Alien Box, we have coded an A-grade Structural Multimodal paradigm. This implies full support of the Unicode standard, allowing hot-reloading of complete dictionaries in 7 native languages.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. SHIELDING, FAQ AND LICENSE</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Shielding Architecture</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> Algorithms throttle any anomalous spike in requests.<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> Raw binary signature certification to prevent malware injected into .mp3 files.<br>• <strong style="color: #ffffff; font-weight: 700;">RAM Limiter:</strong> We reject atypical files (>2GB) at the threshold to prevent OOM collapses.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Operational FAQ</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">Q:</strong> Port 8000 "Address Already In Use".<br><strong style="color: #ffffff; font-weight: 700;">A:</strong> Run <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code>.<br><strong style="color: #ffffff; font-weight: 700;">Q:</strong> Deadlock when uploading WAV.<br><strong style="color: #ffffff; font-weight: 700;">A:</strong> Collapsed RAM or blocked binary signature.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // Manifesto and License<br>
+                Developed at **produktes-code** by CHUS BZN. Licensed under CC BY-NC-SA 4.0. CORPORATE STANDARD - RETAIL READY.
+            </div>
+        </div>
+    </div>
+    
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">Техническое руководство по эксплуатации</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">ВЕРСИЯ 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">Конфиденциально – DSP Architecture | LANG: RU</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. АРХИТЕКТУРА СИСТЕМЫ</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">Что такое Alien Box?</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box — это станция форензического анализа аудио, основанная на глубоких нейронных сетях. В отличие от традиционного разделителя стемов, Alien Box использует матрицу Demucs v4 в сочетании с алгоритмами транскрипции Basic-Pitch для декодирования музыкальной ДНК любого коммерческого трека.</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Система предназначена для работы на этапе предпродакшна и в студии (White Room), предоставляя продюсерам возможность похищать спектральную подпись, динамический диапазон и MIDI-паттерны сложных референсов, мгновенно экспортируя их как нативные шаблоны для сред DAW.</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Движок Alien Bioworks</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Ядро системы ("Alien Engine") выполняет асинхронные процессы в изолированной среде, обеспечивая расчет быстрых преобразований Фурье (FFT) и гармонический ресинтез. Мы не используем симуляции; каждое извлечение анализирует стереофазу и корреляцию исходного звука.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. ТЕХНИЧЕСКОЕ РАЗВЕРТЫВАНИЕ И УСТАНОВКА CI/CD</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Строгий конвейер</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Мы используем строгий конвейер (CI/CD) для настольного приложения, гарантирующий безошибочное развертывание и нативную установку.</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Поскольку у него нет платного сертификата разработчика Apple, Gatekeeper временно поместит двоичный файл в карантин в целях безопасности. Законный и сертифицированный инженерами метод локального обхода — щелкнуть правой кнопкой мыши по приложению -> Открыть (не дважды щелкайте). Это не ошибка и не поврежденный файл, это стандартный рабочий процесс в высокопроизводительном ПО с открытым исходным кодом.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defender отобразит синий экран с надписью «Защита ПК». Просто нажмите «Подробнее», а затем появившуюся кнопку «Выполнить в любом случае».</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. ПОТОК СИГНАЛОВ И МАРШРУТИЗАЦИЯ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Абсолютная прозрачность</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Профессиональная платформа студийного уровня должна обеспечивать абсолютную прозрачность своих потоков данных. Консоль не является просто декоративной.</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Маршрутизация ввода/вывода</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">При производстве с высокой плотностью тяжелый рендеринг на основном SSD-накопителе может заглушить подкачку памяти системы. Alien Box детерминированно перенаправляет и сопоставляет кеш с RAID-массивами или накопителями NVMe.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">64-битная нейронная изоляция</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Вся внутренняя обработка происходит в 64-битной арифметике с плавающей запятой. Это предотвращает любую деградацию фазы или искажения во время перекрестных вычислений.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. ПАНЕЛЬ ПОХИЩЕНИЯ (ВВОД)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Универсальный ввод (URL или текст)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Система принимает любой действительный URL-адрес (YouTube, Spotify) или произвольный текст (например, «The Prodigy - Poison»). Модуль фонового парсинга перехватывает метаданные и аудиопоток в реальном времени в обход стандартных защит.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Выбор среды (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box компилирует извлеченные данные в структурированные проприетарные шаблоны. Поддерживаемые форматы: Ableton Live (.als), Logic Pro (.logicx), Cubase (.cpr), FL Studio (.flp) и Pro Tools (.ptx). Генерируются предварительно настроенные групповые шины и маршрутизации с нативными плагинами.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. РЕЖИМЫ ИЗВЛЕЧЕНИЯ (D1, D2, D3)</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Режим D1 (Легкий)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Анализ транзиентов и генерация ритмического MIDI. Извлекает фундаментальный грув без обработки тяжелой полифонии. Идеально подходит для клонирования точного свинга трека. Время выполнения: ~5с.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Режим D2 (Глубокий)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Активирует модуль demucs. Разделение на 4 стема (Вокал, Ударные, Бас, Другое). Извлечение полифонического MIDI через basic-pitch, обнаружение базового FM- или волнового синтеза. Время выполнения: ~3м.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Режим D3 (Экстремальный)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Разбивка на 6 стемов. Форензический анализ кривой эквализации и специфических аппаратных аналоговых эмуляций оригинальных инженеров по микшированию.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. ФОРЕНЗИЧЕСКОЕ ДЕКОДИРОВАНИЕ (СЛОЙ ЗА СЛОЕМ)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Бочка, малый барабан и перкуссия (Ударные)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> Анализируются основная частота (например, 48 Гц) и вторичная гармоника удара (щелчок). Alien Box делает вывод о хирургическом эквалайзере в стиле SSL E-Channel и предлагает моно-якорь, фильтруя боковой канал < 120 Гц.<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> Идентифицирует щелчок подструнника (от 2 до 5 кГц) и фундаментальное тело (150-250 Гц). Предлагает Transient Shapers.<br>• <strong style="color: #ffffff; font-weight: 700;">Hi-Hats:</strong> Обнаруживает резкость и автоматически предлагает De-Essers или сверхбыструю многополосную компрессию.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Синтезаторы, гитары и вспомогательная перкуссия</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Congas / Toms:</strong> Асимметричное отображение стереопанорамирования (Л/П) и динамическая эквализация для устранения «звонов».<br>• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> Определение среза фильтра (Cutoff) и введение расширителей стерео на основе эффекта Хааса.<br>• <strong style="color: #ffffff; font-weight: 700;">Guitars:</strong> Определяет деревянный корпус или искажение усилителя. Предлагает стратегические вырезы между 200-500 Гц для очистки частотной грязи.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">Струнные, духовые и вокал</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Strings/Brass:</strong> Анализ артикуляции. Выводит конволюционную реверберацию темного типа «Hall» или «Chamber».<br>• <strong style="color: #ffffff; font-weight: 700;">Vocals:</strong> Анализирует цепь ведущего вокала. Обнаруживает последовательную компрессию (Например: быстрая атака в стиле 1176 с последующим оптическим выравниванием LA-2A) и активный динамический эквалайзер.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. СУПЕР-ПРОМПТ ИИ И РУКОВОДСТВО ПО МИКШИРОВАНИЮ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Руководство по микшированию и маршрутизации</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Сообщается об обнаруженных методах, таких как экстремальная компрессия Sidechain (Ghost Kick), использование стерео-расширения (алгоритм Хааса), De-Essing вокала и гармонические искажения на групповых шинах (Tape/Tube saturation).</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Супер-промпт ИИ</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box компилирует все эти данные (BPM, тональность, целевые LUFS, структура, инструменты) в строго структурированный промпт, оптимизированный для генеративных моделей (Suno, Udio, Stable Audio), заставляя их придерживаться параметров профессионального мастеринга.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. ТЕЛЕМЕТРИЯ И УПАКОВКА</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Датчики Alien Bioworks</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Верхний значок датчиков активирует мониторинг Alien Engine в реальном времени. Позволяет инженеру наблюдать использование ЦП, выделение ОЗУ и задержку во время глубокого извлечения в режиме D2/D3.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Загрузка шаблона .ZIP</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Кнопка динамически генерирует ZIP-файл на сервере, содержащий:<br>• Файл проекта выбранной DAW.<br>• Структуру шин, маршрутизированную и отмеченную цветом.<br>• Извлеченные MIDI-файлы, импортированные прямо на их дорожки.<br>• Текстовую копию технического паспорта.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. ГЛОБАЛЬНАЯ МУЛЬТИМОДАЛЬНАЯ АРХИТЕКТУРА</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">100% структурная поддержка Unicode</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Обработка интернационализации корпоративного инструмента с помощью простых плоских файлов перевода JSON недостаточна. В Alien Box мы закодировали структурную мультимодальную парадигму класса А. Это подразумевает полную поддержку стандарта Unicode, позволяя выполнять горячую перезагрузку полных словарей на 7 языках.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. ЗАЩИТА, FAQ И ЛИЦЕНЗИЯ</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Архитектура защиты (Shielding)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> Алгоритмы ограничивают любой аномальный всплеск запросов.<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> Сертификация необработанной двоичной подписи для предотвращения вредоносного ПО.<br>• <strong style="color: #ffffff; font-weight: 700;">Limitador RAM:</strong> Мы отклоняем нетипичные файлы (>2ГБ) для предотвращения краха OOM.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Оперативный FAQ</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">В:</strong> Порт 8000 "Address Already In Use".<br><strong style="color: #ffffff; font-weight: 700;">О:</strong> Выполните <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code>.<br><strong style="color: #ffffff; font-weight: 700;">В:</strong> Взаимная блокировка при загрузке WAV.<br><strong style="color: #ffffff; font-weight: 700;">О:</strong> Сбой RAM или заблокированная подпись.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // Манифест и лицензия<br>
+                Разработано в **produktes-code** (CHUS BZN). Лицензия CC BY-NC-SA 4.0. КОРПОРАТИВНЫЙ СТАНДАРТ - RETAIL READY.
+            </div>
+        </div>
+    </div>
+    
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">Технічний посібник</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">ВЕРСІЯ 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">Конфіденційно – DSP Architecture | LANG: UK</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. АРХІТЕКТУРА СИСТЕМИ</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">Що таке Alien Box?</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box — це станція форензичного аналізу аудіо на основі глибоких нейромереж. На відміну від традиційного розділювача стемів, Alien Box використовує матрицю Demucs v4 у поєднанні з алгоритмами транскрипції Basic-Pitch для декодування музичної ДНК будь-якого комерційного треку.</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Система розроблена для роботи на етапі пре-продакшну та в студії (White Room), пропонуючи продюсерам можливість вилучати спектральну сигнатуру, динамічний діапазон та MIDI-патерни складних референсів, миттєво експортуючи їх як нативні шаблони для середовищ DAW.</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Рушій Alien Bioworks</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Ядро системи ("Alien Engine") виконує асинхронні процеси в ізольованому середовищі, дозволяючи обчислювати швидкі перетворення Фур'є (FFT) та гармонійний ресинтез. Ми не використовуємо симуляції; кожне вилучення аналізує стереофазу та кореляцію вихідного звуку.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. ТЕХНІЧНЕ РОЗГОРТАННЯ ТА ВСТАНОВЛЕННЯ CI/CD</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Суворий конвеєр</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Ми використовуємо суворий конвеєр (CI/CD) для настільної програми, гарантуючи бездоганне розгортання та нативне встановлення.</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Оскільки немає платного сертифіката розробника Apple, Gatekeeper тимчасово помістить двійковий файл у карантин. Законний метод локального обходу — клацнути правою кнопкою миші програму -> Відкрити. Це не помилка, це стандартний робочий процес у ПЗ з відкритим вихідним кодом.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defender відобразить синій екран із написом «ПК захищено». Просто натисніть «Докладніше», а потім кнопку «Виконати в будь-якому випадку».</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. ПОТІК СИГНАЛІВ ТА МАРШРУТИЗАЦІЯ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Абсолютна прозорість</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Професійна платформа студійного рівня повинна забезпечувати абсолютну прозорість потоків даних. Консоль не є просто декоративною.</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Маршрутизація I/O</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">У високощільних проектах важкий рендеринг на SSD може перевантажити систему. Alien Box перенаправляє кеш на диски RAID або NVMe.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">64-бітна нейронна ізоляція</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Уся внутрішня обробка відбувається у 64-бітній арифметиці. Це запобігає будь-якій деградації фази під час перехресних обчислень.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. ПАНЕЛЬ ВИТЯГАННЯ (ВВІД)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Універсальний ввід (URL або текст)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Система приймає будь-яку URL-адресу (YouTube, Spotify) або вільний текст (наприклад, "The Prodigy - Poison"). Модуль фонового парсингу перехоплює метадані та аудіопотік у реальному часі.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Вибір середовища (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box компілює дані у структуровані шаблони. Підтримуються форматы: Ableton Live, Logic Pro, Cubase, FL Studio та Pro Tools. Створюються налаштовані групові шини з нативними плагінами.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. РЕЖИМИ ВИТЯГАННЯ (D1, D2, D3)</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Режим D1 (Легкий)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Аналіз транзієнтів і генерація ритмічного MIDI. Вилучає фундаментальний грув без обробки важкої поліфонії. Ідеально підходить для клонування свінгу. Час: ~5с.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Режим D2 (Глибокий)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Активує модуль demucs. Розділення на 4 стеми (Вокал, Барабани, Бас, Інше). Вилучення поліфонічного MIDI через basic-pitch. Час: ~3хв.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Режим D3 (Екстремальний)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Розбивка на 6 стемів. Форензичний аналіз кривої еквалізації та специфічних апаратних аналогових емуляцій оригінальних інженерів мікшування.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. ФОРЕНЗИЧНЕ ДЕКОДУВАННЯ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Барабани та перкусія (Drums)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> Аналізується основна частота (наприклад, 48 Гц). Пропонує моно-якір, фільтруючи бічний канал < 120 Гц.<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> Ідентифікує щиголь підструнника. Пропонує Transient Shapers.<br>• <strong style="color: #ffffff; font-weight: 700;">Hi-Hats:</strong> Виявляє різкість і автоматично пропонує De-Essers.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Синтезатори, гітари та перкусія</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Congas / Toms:</strong> Асиметричне панорамування (Л/П) та динамічна еквалізація.<br>• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> Визначення зрізу фільтра та ін'єкція розширювачів стерео (ефект Хааса).<br>• <strong style="color: #ffffff; font-weight: 700;">Guitars:</strong> Пропонує стратегічні вирізи між 200-500 Гц для очищення бруду.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">Струнні, духові та вокал</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Strings:</strong> Аналіз артикуляції. Виводить реверберацію типу «Hall».<br>• <strong style="color: #ffffff; font-weight: 700;">Vocals:</strong> Аналізує ланцюг вокалу. Виявляє компресію (1176 -> LA-2A) та активний динамічний еквалайзер.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. СУПЕР-ПРОМПТ ІІ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Посібник з мікшування</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Повідомляється про виявлені методи, такі як Sidechain Compression, алгоритм Хааса, De-Essing вокалу та гармонійні спотворення (Tape saturation).</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Супер-промпт</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box компілює ці дані (BPM, тональність, LUFS) у структурований промпт для моделей (Suno, Udio), змушуючи їх дотримуватися параметрів професійного мастерингу.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. ТЕЛЕМЕТРІЯ ТА ПАКУВАННЯ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Датчики Alien Bioworks</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Значок датчиків активує моніторинг Alien Engine. Дозволяє спостерігати використання ЦП та ОЗП під час вилучення.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Завантаження .ZIP</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Кнопка генерує ZIP-файл, що містить проект DAW, структуру шин, MIDI-файли та копію технічного паспорта.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. МУЛЬТИМОДАЛЬНА АРХІТЕКТУРА</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">100% структурна підтримка Unicode</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">У Alien Box ми закодували структурну мультимодальну парадигму класу А. Це означає повну підтримку стандарту Unicode, що дозволяє перезавантажувати повні словники на 7 мовах.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. ЗАХИСТ, FAQ ТА ЛІЦЕНЗІЯ</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Архітектура захисту</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> Алгоритми обмежують аномальні запити.<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> Сертифікація підпису для запобігання зловмисному ПЗ.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Оперативний FAQ</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">П:</strong> Порт 8000 зайнятий.<br><strong style="color: #ffffff; font-weight: 700;">В:</strong> Виконайте <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code>.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // Ліцензія<br>
+                Розроблено **produktes-code** (CHUS BZN). CC BY-NC-SA 4.0. КОРПОРАТИВНИЙ СТАНДАРТ.
+            </div>
+        </div>
+    </div>
+    
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">技术操作手册</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">版本 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">机密 – DSP 架构 | LANG: ZH</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. 系统架构</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">Alien Box 是什么？</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box 是一款基于深度神经网络的法医音频分析工作站。与传统的音轨分离器不同，Alien Box 使用 Demucs v4 矩阵结合 Basic-Pitch 转录算法来解码任何商业曲目的音乐 DNA。</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">该系统旨在制作前阶段和工作室 (White Room) 运行，让制作人能够提取复杂参考音轨的频谱特征、动态范围和 MIDI 模式，并将它们立即导出为 DAW 环境的本地模板。</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Alien Bioworks 引擎</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">系统的核心（“Alien Engine”）在隔离环境中执行异步过程，允许计算快速傅里叶变换 (FFT) 和谐波重新合成。我们不使用模拟；每次提取都会分析源音频的立体声相位和相关性。</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. 技术部署和 CI/CD 安装</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">严格的流水线</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">我们对桌面应用程序采用了严格的 CI/CD 流水线，保证了无故障部署和本地安装。</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">由于没有付费的 Apple 开发者证书，Gatekeeper 出于安全考虑会暂时隔离该二进制文件。工程师认证的本地绕过方法是右键单击应用程序 -> 打开（不要直接双击）。这不是错误或损坏的文件，这是高性能开源软件的标准工作流程。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defender 将显示蓝屏，提示“Windows 已保护你的电脑”。只需单击“更多信息”，然后单击出现的“仍要运行”按钮。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. 信号流和路由</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">绝对透明度</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">专业工作室级平台必须确保其数据流的绝对透明度。控制台不仅是装饰性的。</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">I/O 路由</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">在高密度制作中，主 SSD 上的繁重渲染可能会阻塞系统的内存分页。Alien Box 确定性地将缓存重定向并映射到 RAID 阵列或 NVMe 驱动器。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">64 位隔离</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">所有内部处理均在 64 位浮点算术中发生。这可防止在交叉计算期间发生任何相位降级或失真。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. 提取面板 (输入)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">通用输入 (URL 或文本)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">该系统接受任何有效的 URL（YouTube、Spotify）或自由文本（例如“The Prodigy - Poison”）。后台抓取模块实时拦截元数据和音频流，绕过标准保护。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">环境选择 (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box 将提取的数据编译为结构化的专有模板。支持的格式包括：Ableton Live、Logic Pro、Cubase、FL Studio 和 Pro Tools。使用本机插件生成预配置的组总线和路由。</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. 提取模式 (D1, D2, D3)</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">模式 D1 (轻量级)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">瞬态分析和节奏 MIDI 生成。提取基本律动而无需处理繁重的复音。非常适合克隆曲目的确切摆动。执行时间：~5秒。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">模式 D2 (深度)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">激活 demucs 模块。分离为 4 个音轨（人声、鼓、贝斯、其他）。通过 basic-pitch 提取复音 MIDI，检测底层的 FM 或波表合成。执行时间：~3分钟。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">模式 D3 (极端)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">分解为 6 个音轨。原始混音工程师的均衡曲线和特定硬件模拟的法医分析。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. 法医解码</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">底鼓，军鼓和打击乐</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> 分析基频（如 48Hz）和二次打击谐波。推断 SSL E-Channel 风格的 EQ。<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> 识别军鼓的 Snap (2kHz-5kHz)。<br>• <strong style="color: #ffffff; font-weight: 700;">Hi-Hats:</strong> 检测刺耳声并建议使用 De-Essers。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">合成器和吉他</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Congas:</strong> 动态均衡以消除铃声。<br>• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> 识别滤波器截止频率并基于哈斯效应注入立体声宽度器。<br>• <strong style="color: #ffffff; font-weight: 700;">Guitars:</strong> 建议在 200-500Hz 之间进行战略性削减。</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">弦乐和人声</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Strings:</strong> 发音分析。推断卷积混响。<br>• <strong style="color: #ffffff; font-weight: 700;">Vocals:</strong> 剖析主唱链。检测串行压缩 (1176 -> LA-2A) 和动态 EQ。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. AI 超级提示和混音指南</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">混音和路由指南</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">报告检测到的技术，例如极端的侧链压缩、哈斯算法、人声 De-Essing 和组总线上的谐波失真。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">超级提示词</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">将所有这些数据（BPM，目标 LUFS，结构）编译成结构化的提示，针对 Suno 或 Udio 等生成模型进行了优化。</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. 遥测和打包</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">传感器</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">实时监控 Alien Engine。观察 CPU 使用率，RAM 分配和延迟时间。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">下载 .ZIP</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">动态生成包含 DAW 项目文件，MIDI 和技术数据表的 ZIP 文件。</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. 全局多模态架构</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">100% Unicode 支持</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">在 Alien Box 中，我们编码了 A 级结构化多模态范式。这允许以 7 种母语热重载完整的字典。</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. 安全，常见问题和许可证</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">防洪限制</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> 算法限制任何异常的请求高峰。<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> 原始二进制签名认证，以防止恶意软件。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">操作常见问题</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">问:</strong> 端口 8000 已被占用。<br><strong style="color: #ffffff; font-weight: 700;">答:</strong> 运行 <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code>。</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // 宣言和许可证<br>
+                由 **produktes-code** 开发。根据 CC BY-NC-SA 4.0 许可。企业标准。
+            </div>
+        </div>
+    </div>
+    
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">技術・操作マニュアル</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">バージョン 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">機密 – DSP Architecture | LANG: JA</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. システムアーキテクチャ</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">Alien Box とは？</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Boxは、深層ニューラルネットワークに基づく法医学的オーディオ分析ステーションです。従来のステム分離器とは異なり、Demucs v4マトリックスとBasic-Pitch転写アルゴリズムを組み合わせて、商用トラックの音楽DNAをデコードします。</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">システムはプレプロダクションおよびスタジオフェーズで動作するように設計されており、複雑なリファレンスのスペクトルシグネチャ、ダイナミックレンジ、およびMIDIパターンを抽出し、DAW環境用のネイティブテンプレートとして瞬時にエクスポートします。</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Alien Bioworks エンジン</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">システムのコアは、分離された環境で非同期プロセスを実行し、高速フーリエ変換（FFT）と高調波再合成の計算を可能にします。シミュレーションは使用しません。各抽出は、ソースオーディオのステレオ位相と相関を分析します。</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. デプロイとCI/CDのインストール</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">厳格なパイプライン</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">デスクトップアプリケーションに厳格なパイプライン（CI/CD）を採用し、完璧なデプロイメントとネイティブインストールを保証します。</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">有料のApple開発者証明書がないため、Gatekeeperはセキュリティのためにバイナリを一時的に隔離します。ローカルバイパスの正当な方法は、アプリケーションを右クリックして[開く]を選択することです。これはオープンソースソフトウェアの標準的なワークフローです。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defenderは、「WindowsによってPCが保護されました」という青い画面を表示します。「詳細情報」をクリックしてから、「実行」ボタンをクリックするだけです。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. 信号の流れとルーティング</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">絶対的な透明性</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">プロフェッショナルなスタジオグレードのプラットフォームは、データフローの絶対的な透明性を提供する必要があります。</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">I/O ルーティング</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">高密度の制作では、メインSSDドライブでの重いレンダリングがシステムのメモリページングを窒息させる可能性があります。Alien Boxは、キャッシュをRAIDアレイまたはNVMeドライブにリダイレクトします。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">64ビットの神経分離</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">すべての内部処理は、64ビットの浮動小数点演算で行われます。これにより、クロス計算中の位相の低下や歪みが防止されます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. 抽出パネル (入力)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">ユニバーサル入力 (URL またはテキスト)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">システムは、有効なURL（YouTube、Spotify）またはフリーテキスト（例：「The Prodigy-Poison」）を受け入れます。バックグラウンドスクレイピングモジュールは、標準の保護をバイパスして、メタデータとオーディオストリームをリアルタイムで傍受します。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">環境の選択 (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Boxは、抽出されたデータを構造化された独自のテンプレートにコンパイルします。サポートされているフォーマット：Ableton Live、Logic Pro、Cubase、FL Studio、Pro Tools。</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. 抽出モード (D1, D2, D3)</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">D1 モード (軽量)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">トランジェント分析とリズミカルなMIDI生成。重いポリフォニーを処理せずに基本的なグルーブを抽出します。実行時間：約5秒。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">D2 モード (詳細)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">demucsモジュールをアクティブにします。4つのステム（ボーカル、ドラム、ベース、その他）への分離。実行時間：約3分。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">D3 モード (極端)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">6つのステムへの内訳。元のミキシングエンジニアの等化曲線と特定のハードウェアアナログエミュレーションの法医学的分析。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. 法医学的デコード</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">キックとスネア</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> 基本周波数（例：48Hz）と二次パンチ高調波を分析します。<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> スネアワイヤーのスナップを識別します。<br>• <strong style="color: #ffffff; font-weight: 700;">Hi-Hats:</strong> ハーシュネスを検出し、De-Esserを推奨します。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">シンセとギター</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> フィルターカットオフの識別とハース効果に基づくステレオワイドナーの注入。<br>• <strong style="color: #ffffff; font-weight: 700;">Guitars:</strong> 200〜500Hzの戦略的カットを提案して、泥をきれいにします。</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">ストリングスとボーカル</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Vocals:</strong> リードボーカルチェーンを解剖します。シリアル圧縮（例：1176の後のLA-2A）と動的EQを検出します。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. AI スーパープロンプト</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">ミキシングガイド</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">ゴーストキック、ハースアルゴリズム、テープサチュレーションなどの検出された手法が報告されます。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">プロンプト</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Boxは、これらのすべてのデータ（BPM、キー、ターゲットLUFS）を構造化されたプロンプトにコンパイルし、Sunoなどの生成モデルをフィードバックします。</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. テレメトリーとパッケージ</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">センサー</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Engineのリアルタイム監視。CPU使用率とRAM割り当てを観察します。</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">.ZIP のダウンロード</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">DAWプロジェクトファイル、MIDI、およびテクニカルシートのコピーを含むZIPファイルをサーバー上に動的に生成します。</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. グローバルなマルチモーダル</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">100% Unicode サポート</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Boxでは、Aグレードの構造化マルチモーダルパラダイムをコーディングしました。7つの言語での辞書のホットリロードが可能です。</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. 保護とライセンス</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">シールドアーキテクチャ</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> リクエストの異常なスパイクを抑制します。<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> マルウェアを防ぐための生のバイナリ署名。</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">FAQ</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">Q:</strong> ポート8000が使用中。<br><strong style="color: #ffffff; font-weight: 700;">A:</strong> <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code> を実行します。</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // ライセンス<br>
+                **produktes-code** 開発。CC BY-NC-SA 4.0のライセンス。コーポレートスタンダード。
+            </div>
+        </div>
+    </div>
+    
+    <!-- PORTADA -->
+    <div class="a4-page">
+        <div class="cover-content">
+            <img src="file:///Users/jesusferrer/Desktop/stitch_alien_box_music_interface/alien_imagotype/screen.png" alt="Logo" class="logo-img">
+            <h1 class="cover-title">ALIEN BOX</h1>
+            <div class="cover-subtitle">Technisches Handbuch</div>
+            
+            <div class="cover-box">
+                <div class="cover-box-version">VERSION 1.0.0 (RELEASE CANDIDATE)</div>
+                <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
+                <div class="cover-box-conf">Vertraulich – DSP Architecture | LANG: DE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPÍTULOS 1, 2, 3 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">1. SYSTEMARCHITEKTUR</div>
+            <div class="two-cols">
+                <div class="col-left">
+                    <div class="panel-title white">Was ist Alien Box?</div>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box ist eine forensische Audioanalysestation, die auf tiefen neuronalen Netzen basiert. Im Gegensatz zu herkömmlichen Stem-Separatoren verwendet Alien Box die Demucs v4-Matrix in Kombination mit Basic-Pitch-Transkriptionsalgorithmen, um die musikalische DNA jedes kommerziellen Tracks zu decodieren.</p><p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Das System ist für den Betrieb in der Vorproduktions- und Studio-Phase konzipiert und bietet Produzenten die Möglichkeit, die spektrale Signatur, den Dynamikbereich und die MIDI-Muster komplexer Referenzen zu extrahieren und sofort als native Templates für DAW-Umgebungen zu exportieren.</p>
+                </div>
+                <div class="col-right">
+                    <div style="width:60px;height:60px;border:2px solid #75ff9e;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:inset 0 0 12px rgba(117,255,158,0.2);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#75ff9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <div style="color:#75ff9e;font-size:6px;margin-top:4px;font-weight:700;letter-spacing:1px;">ASTROVOLT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title purple">Alien Bioworks Engine</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Der Kern des Systems ("Alien Engine") führt asynchrone Prozesse in einer isolierten Umgebung aus und ermöglicht so die Berechnung schneller Fourier-Transformationen (FFT) und die harmonische Resynthese. Wir verwenden keine Simulationen; jede Extraktion analysiert die Stereophase und Korrelation des Quellaudios.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">2. TECHNISCHE BEREITSTELLUNG</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Strenge Pipeline</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Wir verwenden eine strenge CI/CD-Pipeline für die Desktop-Anwendung, die eine fehlerfreie Bereitstellung garantiert.</p>
+            </div>
+            <div class="two-cols">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">macOS (Gatekeeper)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Da es kein kostenpflichtiges Apple-Zertifikat hat, wird Gatekeeper die Binärdatei aus Sicherheitsgründen vorübergehend unter Quarantäne stellen. Rechtsklick auf die App -> Öffnen.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title white">Windows (SmartScreen)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Windows Defender zeigt einen blauen Bildschirm an. Klicken Sie auf "Weitere Informationen" und dann auf "Trotzdem ausführen".</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">3. SIGNALFLUSS UND ROUTING</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Absolute Transparenz</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Eine professionelle Plattform muss absolute Transparenz über ihre Datenflüsse bieten.</p>
+            </div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">I/O Routing</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box leitet den Cache deterministisch an RAID-Arrays oder NVMe-Laufwerke weiter.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">64-Bit-Isolierung</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Die gesamte interne Verarbeitung erfolgt in 64-Bit-Gleitkomma-Arithmetik. Dies verhindert jede Phasenverschlechterung während der Kreuzberechnung.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: CAPÍTULOS 4, 5, 6 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">4. EINGABE-PANEL (INPUT)</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Universelle Eingabe</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Das System akzeptiert jede URL oder Freitext. Ein Hintergrund-Scraping-Modul fängt die Metadaten in Echtzeit ab.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Umgebungsauswahl (DAW)</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box kompiliert die extrahierten Daten. Unterstützte Formate: Ableton, Logic, Cubase, FL Studio, Pro Tools.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">5. EXTRAKTIONSMODI</div>
+            <div class="two-cols" style="gap:8px;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Modus D1 (Leicht)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Transientenanalyse und rhythmische MIDI-Generierung. Ideal zum Klonen des genauen Swings. Ausführungszeit: ~5s.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Modus D2 (Tief)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Trennung in 4 Stems und polyphone MIDI-Extraktion über Basic-Pitch. Ausführungszeit: ~3m.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Modus D3 (Extrem)</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Aufschlüsselung in 6 Stems. Forensische Analyse der Equalizer-Kurve und Hardware-Emulationen.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">6. FORENSISCHE DEKODIERUNG</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Kick und Snare</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Kick:</strong> Analysiert die Grundfrequenz und den sekundären Punch. Schlägt Mono-Verankerung vor.<br>• <strong style="color: #ffffff; font-weight: 700;">Snare:</strong> Identifiziert den Snap. Schlägt Transient Shapers vor.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">Synths und Gitarren</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Synths:</strong> Identifizierung des Filter-Cutoffs und Injektion von Stereo-Wideners (Haas-Effekt).<br>• <strong style="color: #ffffff; font-weight: 700;">Guitars:</strong> Schlägt Kürzungen zwischen 200-500 Hz vor, um Frequenzschlamm zu bereinigen.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom:0;">
+                <h2 class="panel-title white">Streicher und Gesang</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Vocals:</strong> Seziert die Lead-Vocal-Chain. Erkennt serielle Kompression (z.B. 1176 -> LA-2A).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CAPÍTULOS 7, 8, 9, 10 -->
+    <div class="a4-page">
+        <div class="chapter-container">
+            <div class="chapter-title" style="margin-top:0;">7. SUPER PROMPT AI</div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Mischhandbuch</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Extremes Sidechain-Compression, Haas-Algorithmus und Tape-Sättigung werden gemeldet.</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title orange">Prompt</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Alien Box kompiliert alle diese Daten (BPM, Key, LUFS) in einen strukturierten Prompt für Modelle wie Suno oder Udio.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">8. TELEMETRIE UND VERPACKUNG</div>
+            <div class="glass-panel">
+                <h2 class="panel-title white">Sensoren</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Echtzeit-Überwachung der Alien Engine (CPU, RAM).</p>
+            </div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">.ZIP Download</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Generiert eine ZIP-Datei mit DAW-Projekt, MIDI-Dateien und einer Kopie des technischen Datenblatts.</p>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-title">9. MULTIMODALE ARCHITEKTUR</div>
+            <div class="glass-panel">
+                <h2 class="panel-title green">100% Unicode</h2>
+                <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">Wir haben ein strukturelles multimodales Paradigma codiert. Dies ermöglicht das Hot-Reloading von Wörterbüchern in 7 Muttersprachen.</p>
+            </div>
+        </div>
+        
+        <div class="chapter-container">
+            <div class="chapter-title">10. SCHUTZ UND LIZENZ</div>
+            <div class="two-cols" style="margin-bottom:0;">
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">Abschirmung</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;">• <strong style="color: #ffffff; font-weight: 700;">Anti-Flood:</strong> Begrenzt anomale Anfragen.<br>• <strong style="color: #ffffff; font-weight: 700;">Magic Bytes:</strong> Zertifizierung der rohen Binärsignatur.</p>
+                </div>
+                <div class="glass-panel" style="flex:1; margin-bottom:0;">
+                    <h2 class="panel-title purple">FAQ</h2>
+                    <p style="margin-top: 4px; color: #bacbb9; font-size: 11.5px; line-height: 1.4;"><strong style="color: #ffffff; font-weight: 700;">F:</strong> Port 8000 belegt. <br><strong style="color: #ffffff; font-weight: 700;">A:</strong> <code style="font-family: monospace; color: #75ff9e; font-size: 10.5px;">lsof -i :8000 -t | xargs kill -9</code> ausführen.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; font-family: monospace; font-size: 9px; color: #5a6668; text-transform: uppercase;">
+                ALIEN BIOWORKS 2026 // Lizenz<br>
+                Entwickelt bei **produktes-code**. Lizenziert unter CC BY-NC-SA 4.0. CORPORATE STANDARD.
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
