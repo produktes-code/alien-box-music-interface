@@ -2,6 +2,11 @@
   "name": "alien-box-music-interface",
   "private": true,
   "version": "1.0.0",
+  "description": "Alien Box: The Universal Musical Bible",
+  "author": {
+    "name": "CHUS BZN",
+    "email": "dev@produktes.code"
+  },
   "main": "main.cjs",
   "scripts": {
     "pack:win": "electron-builder --win",
