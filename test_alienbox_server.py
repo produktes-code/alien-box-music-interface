@@ -2,7 +2,6 @@ import pytest
 import threading
 import time
 import requests
-import json
 from alienbox_server import AlienBoxHandler
 import http.server
 
@@ -25,7 +24,7 @@ def server():
     httpd.server_close()
 
 def test_health_check_options(server):
-    response = requests.options(f"http://localhost:{PORT}/alienbox")
+    response = requests.options(f"http://localhost:{PORT}/alienbox", timeout=5)
     assert response.status_code == 200
 
 def test_generate_mock_json_d1(server):
@@ -35,7 +34,7 @@ def test_generate_mock_json_d1(server):
         "mode": "D1",
         "breakdown": "all"
     }
-    response = requests.post(f"http://localhost:{PORT}/alienbox", json=payload)
+    response = requests.post(f"http://localhost:{PORT}/alienbox", json=payload, timeout=5)
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "success"
@@ -49,7 +48,7 @@ def test_generate_mock_json_d2(server):
         "mode": "D2",
         "breakdown": "lowend"
     }
-    response = requests.post(f"http://localhost:{PORT}/alienbox", json=payload)
+    response = requests.post(f"http://localhost:{PORT}/alienbox", json=payload, timeout=5)
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "success"
@@ -57,5 +56,5 @@ def test_generate_mock_json_d2(server):
     assert data["midi_data"]["breakdown"] == "lowend"
 
 def test_404_not_found(server):
-    response = requests.post(f"http://localhost:{PORT}/unknown_route", json={"test": 123})
+    response = requests.post(f"http://localhost:{PORT}/unknown_route", json={"test": 123}, timeout=5)
     assert response.status_code == 404

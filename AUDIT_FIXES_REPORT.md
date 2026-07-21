@@ -19,9 +19,9 @@ Auditoría interna ejecutada en `stitch_alien_box_music_interface` unificando re
    - **`bandit`**: Escaneo completado (saltando `./venv/`). Sin hallazgos críticos de seguridad. Los avisos de `random` y llamadas de bajo riesgo a `subprocess` han sido validados como falsos positivos para su uso interno asíncrono.
 
 3. **Auditoría de Paquetes**
-   - `requirements.txt`: Generado limpio solo con las dependencias necesarias de empaquetado (PyInstaller) ya que el server no usa dependencias extra del Standard Library.
+   - `requirements.txt`: Generado limpio con la dependencia necesaria de empaquetado (`pyinstaller>=6.0.0` resuelto tras escalar vulnerabilidades PYSEC-2026-1813 encontradas en la 5.13.2).
    - `pip-audit -r requirements.txt`: 0 vulnerabilidades.
-   - `npm audit`: Revisado con éxito.
+   - `npm audit`: Revisado con éxito. (Configurados meta datos faltantes `author.email` y `description` en `package.json` para empaquetado correcto de la AppImage/deb en Linux).
 
 4. **Documentación**
    - Se inyectó `.env` al `.gitignore` para prevenir futuras exposiciones.
