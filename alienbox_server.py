@@ -1,12 +1,10 @@
 import http.server
 import json
-import urllib.parse
 import os
 import subprocess
 import zipfile
 import time
 import random
-import re
 
 # --- BASE DE DATOS ENCICLOPÉDICA NIVEL 4 ---
 
@@ -40,7 +38,6 @@ def generate_mock_json(input_target, daw, mode="D2", breakdown="all"):
         except Exception:
             pass
 
-    safe_title = re.sub(r'[\\/*?:"<>|]', '_', title)[:50]
     
     # Seleccionamos un perfil aleatorio basado en la base de datos
     profile = random.choice(GENRES)
@@ -59,7 +56,7 @@ def generate_mock_json(input_target, daw, mode="D2", breakdown="all"):
     track_synth = f"SYNTHS/LEADS: Origen sónico inferido: {synth}. Corte LPF automatizado. Ensanchamiento estéreo mediante Efecto Haas."
     track_vocal = f"VOCALS: Chops o voz principal con inteligibilidad máxima en 3kHz. Procesamiento: {vocal}. EQ Mid/Side aislando frecuencias centrales."
     track_perc = f"PERCUSSIONS/TOPS: Hi-hats asimétricos con micro-swing humano (estilo MPC/Groove Pool). Tratamiento: {perc}. Soft-clipping en picos."
-    track_fx = f"FX/ATMOSPHERES: Barridos de ruido blanco (24dB/oct LPF). Impactos sub-graves con pre-delay de 30ms en la reverb para mantener claridad."
+    track_fx = "FX/ATMOSPHERES: Barridos de ruido blanco (24dB/oct LPF). Impactos sub-graves con pre-delay de 30ms en la reverb para mantener claridad."
 
     tracks = [track_kick, track_bass, track_synth, track_vocal, track_perc, track_fx]
 

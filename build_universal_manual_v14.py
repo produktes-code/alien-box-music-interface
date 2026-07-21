@@ -1,4 +1,3 @@
-import os
 import re
 
 langs = ['es', 'en', 'ru', 'uk', 'zh', 'ja', 'de']
@@ -367,8 +366,8 @@ html_header = """<!DOCTYPE html>
 
 html_body = ""
 
-for l in langs:
-    c = content[l]
+for lang in langs:
+    c = content[lang]
         
     html_body += f"""
     <!-- PORTADA -->
@@ -381,7 +380,7 @@ for l in langs:
             <div class="cover-box">
                 <div class="cover-box-version">{c['subtitle']}</div>
                 <div class="cover-box-dev">Desarrollado por CHUS BZN & Alien Bioworks</div>
-                <div class="cover-box-conf">{c['confidential']} | LANG: {l.upper()}</div>
+                <div class="cover-box-conf">{c['confidential']} | LANG: {lang.upper()}</div>
             </div>
         </div>
     </div>

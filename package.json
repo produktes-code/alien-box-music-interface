@@ -24,6 +24,13 @@
         "dmg"
       ]
     },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "AudioVideo"
+    },
     "directories": {
       "output": "dist-electron"
     },
