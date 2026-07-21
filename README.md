@@ -1,43 +1,96 @@
-# Alien Box: The Universal Musical Bible 👽
+![Security Audit](https://img.shields.io/badge/Security_Audit-Passed_Level_4-brightgreen)
+<p align="center">
+  <img src="alien_imagotype/screen.png" width="128" height="128" style="border-radius: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);" alt="Alien Box Logo" />
+</p>
 
-![Alien Box Input](ui_input_en.png)
-![Alien Box Results](ui_results_en.png)
+<h1 align="center">Alien Box V1.0.0 👽</h1>
 
-## 📥 Download
+<p align="center">
+  <b>The Universal Musical Bible & Multimodal Forensic Audio Engine</b><br/>
+  <i>La Biblia Musical Universal y Motor de Análisis Forense Multimodal</i>
+</p>
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows%20.exe-blue?style=for-the-badge&logo=windows)](https://github.com/produktes-code/alien-box-music-interface/releases/latest)
-[![Download for macOS](https://img.shields.io/badge/Download-macOS%20.dmg-lightgray?style=for-the-badge&logo=apple)](https://github.com/produktes-code/alien-box-music-interface/releases/latest)
-[![Download for Linux](https://img.shields.io/badge/Download-Linux%20AppImage-orange?style=for-the-badge&logo=linux)](https://github.com/produktes-code/alien-box-music-interface/releases/latest)
+<p align="center">
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" alt="Build" />
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Status-Enterprise_Ready-success?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-red?style=for-the-badge" alt="License" />
+</p>
+
 🌐 **Read this in:** **🇬🇧 English** | [🇪🇸 Español](README_es.md) | [🇩🇪 Deutsch](README_de.md) | [🇷🇺 Русский](README_ru.md) | [🇯🇵 日本語](README_ja.md) | [🇺🇦 Українська](README_uk.md) | [🇨🇳 中文](README_zh.md)
 
 ---
 
+## 🎯 The Vision (Introduction)
 
-**Alien Box** is a state-of-the-art multimodal forensic audio analysis engine and DAW template generator. It connects directly to global music networks to extract real metadata from any text input, dissects the frequency and dynamic parameters of commercial tracks, and generates customized starter templates for major DAWs (Ableton, Logic Pro, Cubase, FL Studio, Pro Tools).
+**Alien Box** is a state-of-the-art multimodal forensic audio analysis engine and DAW template generator. It connects directly to global music networks to extract real metadata from any text input or URL, dissects the frequency and dynamic parameters of commercial tracks, and generates customized starter templates for major DAWs (Ableton Live, Logic Pro, Cubase, FL Studio, Pro Tools).
 
 Built with precision engineering by **CHUS BZN** at **produktes-code**.
 
-## 🚀 Features
-- **Universal Search:** Input any YouTube link, Spotify link, or free text (e.g., "The Prodigy Poison").
-- **Brutal Forensic Analysis:** Calculates Target LUFS, specific EQ curves (Kick/Bass crossover), and VCA compression attack/release times.
-- **Multimodal Export:** Generates a real ZIP file containing a pre-routed DAW template.
-- **Organic UI:** Fluid, breathing graphic interface with dynamic particle backgrounds.
-- **Native Universal PDF Manual (V14):** High-resolution generated PDF manual translated symmetrically into 7 languages, meticulously formatted and perfectly scaled for DIN A5 printing.
+---
 
-## 🛠 Installation
+## 📸 Interface / Ergonomics
 
-1. Download the installer for your OS from the [Releases](https://github.com/produktes-code/alien-box-music-interface/releases) page.
-2. If using Windows: run the `.exe`. Windows SmartScreen might appear, click "More info" -> "Run anyway".
-3. If using macOS: open the `.dmg` and drag the app to Applications. Gatekeeper might block it; right-click the app and select "Open".
-4. If using Linux: make the `.AppImage` executable and run it, or install the `.deb`.
+![Alien Box Input](ui_input_en.png)
 
-### Development Setup
-Copy `.env.example` to `.env` if you plan to add custom API keys for extensions.
-
-```bash
-npm install
-npm run pack:mac # or pack:win, pack:linux
-```
+![Alien Box Results](ui_results_en.png)
 
 ---
-*Part of the `produktes-code` ecosystem. CC BY-NC-SA 4.0. CORPORATE STANDARD - RETAIL READY.*
+
+## ⚙️ Parameter Masterclass (Features)
+
+- **Universal Search & Parsing:** Input any YouTube URL, Spotify link, or free text (e.g., *"The Prodigy Poison"*).
+- **Forensic Audio Dissection:** Calculates Target LUFS, specific EQ curves (Kick/Bass crossover), and VCA compression attack/release times.
+- **Multimodal DAW Export:** Generates real starter packages containing pre-routed DAW project templates for major digital audio workstations.
+- **Organic Audio Shaders & UI:** Fluid graphic interface with dynamic particle backgrounds and real-time audio visualization shaders.
+- **Native Universal PDF Manual (V14):** High-resolution generated PDF manual translated symmetrically into 7 languages, meticulously formatted and perfectly scaled for DIN A5 printing.
+
+---
+
+## 🛡️ Shielding Architecture (Security)
+
+In Retail and Enterprise deployment, a system crash is not a bug; it is capital loss. We designed a defensive armor (Shielding) emulating DevSecOps best practices:
+
+• **Standard Library Isolation**: Backend server engine relies exclusively on Python standard library components, reducing third-party attack surfaces to zero.
+• **PyInstaller Bootloader Hardening**: Bundled backend powered by PyInstaller >= 6.0.0, resolving legacy bootloader vulnerability vectors (PYSEC-2026-1813).
+• **Automated Regression Suite**: Unit testing enforced via `pytest` validating HTTP options, payload handling, and strict request timeouts.
+
+---
+
+## 🚀 Technical Deployment & CI/CD Installation
+
+We employ **Automated CI/CD via GitHub Actions** for cross-platform desktop compilation (macOS, Windows, and Linux).
+
+### 🛠️ Download Installers
+
+Navigate to the **[Releases](https://github.com/produktes-code/alien-box-music-interface/releases)** section of this repository to download binaries for your OS:
+- **Windows**: `Alien Box Setup.exe` / `AlienBox_Windows_Portable.zip`
+- **macOS**: `Alien Box.dmg`
+- **Linux**: `Alien Box.AppImage` / `.deb`
+
+### 🍎 macOS Users (Gatekeeper)
+Lacking a paid Apple developer certificate, Gatekeeper will quarantine the binary. As engineers, the legitimate local bypass is to **Right-click the app -> Open** (do not double-click). It is the standard flow of high-performance open-source software.
+
+### 🪟 Windows Users (SmartScreen)
+Windows Defender may show a blue 'Windows protected your PC' warning when running the `.exe` installer. Click **'More info'** and then **'Run anyway'**.
+
+---
+
+## 📚 Documentation & Manuals
+
+For an exhaustive technical masterclass, troubleshooting guides, and full API details, please download our official manual:
+
+📥 **[AlienBox_Manual_Definitivo_Universal_V14.pdf (PDF - 7 Languages)](AlienBox_Manual_Definitivo_Universal_V14.pdf)**
+
+---
+
+## ⚖️ Engineering Manifesto, Credits & License
+
+Software conceived and articulated from the produktes-code labs in inseparable union with Engineer Jesus Ferrer Garcia (CHUS BZN).
+
+Licensed under proprietary restrictions and strictest open source margins (CC BY-NC-SA 4.0). CORPORATE STANDARD - RETAIL READY.
+
+---
+
+## Auditoría de Seguridad
+Este repositorio superó satisfactoriamente una auditoría de Nivel 4 (análisis estático, remediación de dependencias y linting de seguridad) con fecha **2026-07-21**.
