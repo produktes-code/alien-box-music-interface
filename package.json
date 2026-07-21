@@ -1,5 +1,49 @@
 {
+  "name": "alien-box-music-interface",
+  "private": true,
+  "version": "1.0.0",
+  "main": "main.cjs",
+  "scripts": {
+    "pack:win": "electron-builder --win",
+    "pack:mac": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.produktes.alienbox",
+    "productName": "Alien Box",
+    "files": [
+      "main.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "directories": {
+      "output": "dist-electron"
+    },
+    "extraResources": [
+      {
+        "from": "dist",
+        "to": "backend"
+      },
+      {
+        "from": "splash_screen_organic_v3_final",
+        "to": "splash_screen_organic_v3_final"
+      }
+    ]
+  },
   "dependencies": {
     "puppeteer": "^25.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "electron": "^43.1.1",
+    "electron-builder": "^26.15.3"
   }
 }
