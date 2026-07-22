@@ -43,7 +43,7 @@ Built with precision engineering by **CHUS BZN** at **produktes-code**.
 - **Forensic Audio Dissection:** Calculates Target LUFS, specific EQ curves (Kick/Bass crossover), and VCA compression attack/release times.
 - **Multimodal DAW Export:** Generates real starter packages containing pre-routed DAW project templates for major digital audio workstations.
 - **Organic Audio Shaders & UI:** Fluid graphic interface with dynamic particle backgrounds and real-time audio visualization shaders.
-- **Native Universal PDF Manual (V14):** High-resolution generated PDF manual translated symmetrically into 7 languages, meticulously formatted and perfectly scaled for DIN A5 printing.
+- **Native Universal PDF Manual:** High-resolution generated PDF manual translated symmetrically into 7 languages, meticulously formatted and perfectly scaled for DIN A5 printing.
 
 ---
 
@@ -85,7 +85,7 @@ If Windows SmartScreen appears during launch, click **'More info'** and then **'
 
 For an exhaustive technical masterclass, troubleshooting guides, and full API details, please download our official manual:
 
-📥 **[AlienBox_Manual_Definitivo_Universal_V14.pdf (PDF - 7 Languages)](AlienBox_Manual_Definitivo_Universal_V14.pdf)**
+📥 **[AlienBox_Manual_Universal.pdf (PDF - 7 Languages)](AlienBox_Manual_Universal.pdf)**
 
 ---
 

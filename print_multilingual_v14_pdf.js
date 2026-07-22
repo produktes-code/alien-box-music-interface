@@ -12,7 +12,7 @@ const path = require('path');
         await page.goto(filePath, { waitUntil: 'networkidle0', timeout: 90000 });
         
         await page.pdf({
-            path: `AlienBox_Manual_Definitivo_Universal_V14.pdf`,
+            path: `AlienBox_Manual_Universal.pdf`,
             format: 'A4',
             printBackground: true,
             preferCSSPageSize: true, 
