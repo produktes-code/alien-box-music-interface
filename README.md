@@ -71,8 +71,13 @@ Navigate to the **[Releases](https://github.com/produktes-code/alien-box-music-i
 ### 🍎 macOS Users (Gatekeeper)
 Lacking a paid Apple developer certificate, Gatekeeper will quarantine the binary. As engineers, the legitimate local bypass is to **Right-click the app -> Open** (do not double-click). It is the standard flow of high-performance open-source software.
 
-### 🪟 Windows Users (SmartScreen)
-Windows Defender may show a blue 'Windows protected your PC' warning when running the `.exe` installer. Click **'More info'** and then **'Run anyway'**.
+### 🪟 Windows Options (Installer vs. Portable)
+
+To accommodate different studio workflows, Alien Box offers two official Windows packages:
+- **Installer (`Alien Box Setup.exe`):** Standard NSIS setup wizard. Installs the application to `Program Files`, creates Start Menu shortcuts, and enables seamless management via Windows Settings.
+- **Portable (`AlienBox_Windows_Portable.zip`):** Standalone zero-installation package. Designed for studio hardware, external USB drives, or restricted environments without Administrator permissions—simply extract and run `AlienBox.exe` directly.
+
+If Windows SmartScreen appears during launch, click **'More info'** and then **'Run anyway'**.
 
 ---
 
