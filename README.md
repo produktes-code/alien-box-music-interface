@@ -79,6 +79,12 @@ To accommodate different studio workflows, Alien Box offers two official Windows
 
 If Windows SmartScreen appears during launch, click **'More info'** and then **'Run anyway'**.
 
+### 🐧 Linux Users (AppImage & Debian)
+- **AppImage**: Grant execution permissions before launching:
+  `chmod +x "Alien Box.AppImage"` and run.
+- **Debian Package (`.deb`)**: Install via terminal:
+  `sudo dpkg -i alien-box-music-interface_1.0.0_amd64.deb` or double-click to install via your distro software manager.
+
 ---
 
 ## 📚 Documentation & Manuals
